@@ -16,19 +16,24 @@ class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var splitNumberLabel: UILabel!
     
+    var tipToApply = 0.0 // Keeps track of the decimal number we need to apply for tip calculation based on which percentage is selected
+    
     @IBAction func tipChanged(_ sender: UIButton) {
         // Check to see what the button that triggered this IBAction is by checking the button's title text label
-        if(sender.titleLabel?.text == "0%"){ // If it is 0%, show selected then deselect all other buttons
+        if(sender.titleLabel?.text == "0%"){ // If it is 0%, show selected then deselect all other buttons and update tipToApply value
+            tipToApply = 0.0
             zeroPercentButton.isSelected = true
             tenPercentButton.isSelected = false
             twentyPercentButton.isSelected = false
         }
-        else if (sender.titleLabel?.text == "10%"){ // If it is 10%, show selected then deselect all other buttons
+        else if (sender.titleLabel?.text == "10%"){ // If it is 10%, show selected then deselect all other buttons and update tipToApply value
+            tipToApply = 0.1
             zeroPercentButton.isSelected = false
             tenPercentButton.isSelected = true
             twentyPercentButton.isSelected = false
         }
-        else{ // If it is 20%, show selected then deselect all other buttons
+        else{ // If it is 20%, show selected then deselect all other buttons and update tipToApply value
+            tipToApply = 0.2
             zeroPercentButton.isSelected = false
             tenPercentButton.isSelected = false
             twentyPercentButton.isSelected = true
@@ -36,19 +41,12 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
+        splitNumberLabel.text = String(format: "%.0f", sender.value)
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
-        // Check to see which button is currently selected, there will only be one button selected at a time
-        if(zeroPercentButton.isSelected){
-            print("0.0")
-        }
-        else if(tenPercentButton.isSelected){
-            print("0.1")
-        }
-        else{
-            print("0.2")
-        }
+        print(tipToApply)
+        print(splitNumberLabel.text ?? 2)
     }
     
 }
