@@ -17,10 +17,10 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var splitNumberLabel: UILabel!
     
     var totalBillCost = 0.0
-    var tipToApply = 0.0 // Keeps track of the decimal number we need to apply for tip calculation based on which percentage is selected
+    var tipToApply = 1.0 // Keeps track of the decimal number we need to apply for tip calculation based on which percentage is selected
     var totalCalculatedResult = 0.0
     var totalPeople = 2
-    var selectedPercentage = ""
+    var selectedPercentage = "0%"
     
     override func viewDidLoad() {
         hideKeyboardWhenTappedAround()
