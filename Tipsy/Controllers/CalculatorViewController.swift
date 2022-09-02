@@ -22,6 +22,10 @@ class CalculatorViewController: UIViewController {
     var totalPeople = 2
     var selectedPercentage = ""
     
+    override func viewDidLoad() {
+        hideKeyboardWhenTappedAround()
+    }
+    
     @IBAction func tipChanged(_ sender: UIButton) {
         // Check to see what the button that triggered this IBAction is by checking the button's title text label
         if(sender.titleLabel?.text == "0%"){ // If it is 0%
@@ -87,6 +91,16 @@ class CalculatorViewController: UIViewController {
             destinationVC.totalPeople = totalPeople
             destinationVC.selectedPercentage = selectedPercentage
         }
+    }
+    
+    func hideKeyboardWhenTappedAround() {
+            let tapGesture = UITapGestureRecognizer(target: self,
+                             action: #selector(hideKeyboard))
+            view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func hideKeyboard() {
+        view.endEditing(true)
     }
 }
 
