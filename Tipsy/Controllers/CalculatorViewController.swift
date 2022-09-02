@@ -18,11 +18,16 @@ class CalculatorViewController: UIViewController {
     
     var totalBillCost = 0.0
     var tipToApply = 0.0 // Keeps track of the decimal number we need to apply for tip calculation based on which percentage is selected
+    var totalCalculatedResult = 0.0
+    var totalPeople = 2
+    var selectedPercentage = ""
     
     @IBAction func tipChanged(_ sender: UIButton) {
         // Check to see what the button that triggered this IBAction is by checking the button's title text label
         if(sender.titleLabel?.text == "0%"){ // If it is 0%
             tipToApply = 1.0 // Update tip value
+            
+            selectedPercentage = "0%"
             
             // Update selection UI
             zeroPercentButton.isSelected = true
@@ -32,6 +37,8 @@ class CalculatorViewController: UIViewController {
         else if (sender.titleLabel?.text == "10%"){ // If it is 10%
             tipToApply = 1.1 // Update tip value
             
+            selectedPercentage = "10%"
+            
             // Update selection UI
             zeroPercentButton.isSelected = false
             tenPercentButton.isSelected = true
@@ -39,6 +46,8 @@ class CalculatorViewController: UIViewController {
         }
         else{ // If it is 20%
             tipToApply = 1.2 // Update tip value
+            
+            selectedPercentage = "20%"
             
             // Update selection UI
             zeroPercentButton.isSelected = false
@@ -62,13 +71,22 @@ class CalculatorViewController: UIViewController {
         }
         
         // Grab the total number of people from the counter stepper
-        let totalPeople = Double(splitNumberLabel.text!)!
+        totalPeople = Int(splitNumberLabel.text!)!
         
         // Calculate the total cost with tip included
         let totalCostWithTip = totalBillCost*tipToApply
-        let splitCostWithTip = totalCostWithTip/totalPeople
-        print(String.init(format: "%.2f", splitCostWithTip))
+        let splitCostWithTip = totalCostWithTip/Double(totalPeople)
+        totalCalculatedResult = Double(String.init(format: "%.2f", splitCostWithTip))!
+        self.performSegue(withIdentifier: "goToResult", sender: self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "goToResult"){
+            let destinationVC = segue.destination as! ResultsViewController
+            destinationVC.totalPerPersonNumber = totalCalculatedResult
+            destinationVC.totalPeople = totalPeople
+            destinationVC.selectedPercentage = selectedPercentage
+        }
+    }
 }
 
