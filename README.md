@@ -1,19 +1,9 @@
-
 # Tipsy
 
 A calculator application to make spliting bills and tips easier!
-
-
-
-# Tipsy
-
-A calculator application to make spliting bills and tips easier!
-
-
 
 ## Demo
 
-Insert gif or link to demo
 
 
 ## Features
