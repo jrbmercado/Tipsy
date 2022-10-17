@@ -3,8 +3,7 @@
 A calculator application to make spliting bills and tips easier!
 
 ## Demo
-
-
+![](https://github.com/jrbmercado/Tipsy/blob/master/tipsy1.gif)
 
 ## Features
 
